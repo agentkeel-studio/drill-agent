@@ -1,0 +1,17 @@
+# The hostile copy's ordinary golden: a copy of refagent's g-001, citing this
+# repository's own data/table.json (r-019) and data/clauses.json (ML-2.1).
+# The attempts are in agent.py, never in a golden (SPEC/08 §11 R7).
+id: g-001
+kind: ordinary
+question: >-
+  Can we publish 'Pim and the Paper Whale' on SVOD in the United States on 2026-12-25, and under what constraints?
+expected:
+  table_row: r-019
+  clause_id: ML-2.1
+  answer_fields:
+    available: true
+    exclusive: true
+    constraints: []
+seat: Data Owner
+added: M08
+retired: null
