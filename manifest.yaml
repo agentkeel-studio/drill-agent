@@ -1,0 +1,45 @@
+# Your agent's manifest (docs/developer/quickstart.md in agentkeel).
+# Every seat is a GitHub login with access to this repository; the platform
+# check refuses a pull request while any is null. The guardrail is the
+# platform's: an agent from the template pins it as given (M06).
+name: drill-agent
+version: 1.0.0
+model:
+  id: anthropic.claude-sonnet-4-6
+  version: null
+  profile: us.anthropic.claude-sonnet-4-6
+  region: us-west-2
+judge_model_id: null
+guardrail:
+  id: 1088aw3ujhyd
+  version: '5'
+endpoint_allowlist:
+- bedrock-runtime
+- dynamodb
+- ecr.api
+- ecr.dkr
+- kms
+- logs
+- s3
+ceilings:
+  concurrency: 2
+  rps_per_edge: 1
+  depth: 2
+  fan_out: 3
+max_tokens_per_session: 20000
+daily_usd: 10
+memory: null
+data_class: internal
+deprecated_after: null
+rollout: all-at-once
+seats:
+  product: null
+  rule-owner: null
+  data-owner: null
+  tool-owner: null
+  threshold-owner: null
+  security: null
+  engineering: null
+may_call: []
+may_be_called_by: []
+platform_version: 108372210c7f

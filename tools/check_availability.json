@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "check_availability",
+  "version": "1.0.0",
+  "seat": "Tool Owner",
+  "description": "The one row of the rights table that governs a title, territory, platform and date, and the clauses that row can be read under. Returns the row; it does not decide the answer.",
+  "input": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["title_id", "territory", "platform", "date"],
+    "properties": {
+      "title_id": {
+        "description": "The slate id, t-NNN. Not the title as written.",
+        "type": "string",
+        "pattern": "^t-[0-9]{3}$"
+      },
+      "territory": {
+        "description": "ISO 3166-1 alpha-2, as the rights table holds it.",
+        "enum": ["AU", "BR", "DE", "FR", "GB", "JP", "US"]
+      },
+      "platform": {"enum": ["AVOD", "PVOD", "SVOD", "THEATRICAL"]},
+      "date": {
+        "description": "The publication date, YYYY-MM-DD, or an instant for a theatrical release under embargo. It is recorded with the call and is not matched on: the row is found by title, territory and platform, and whether the date falls in the window is read from the row.",
+        "type": "string",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}([T ][0-9]{2}:[0-9]{2}(:[0-9]{2})?Z?)?$"
+      }
+    }
+  },
+  "output": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["found", "row", "clause_candidates", "source"],
+    "properties": {
+      "found": {
+        "description": "false when the rights table has no row for this title, territory and platform. There is then nothing to publish under.",
+        "type": "boolean"
+      },
+      "row": {
+        "description": "The governing row, exactly as the rights table holds it. null when found is false.",
+        "anyOf": [
+          {"type": "null"},
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["table_row", "title_id", "territory", "platform", "window_start", "window_end",
+                         "exclusive", "holdback_until", "clearance_expiry", "embargo_lift_local"],
+            "properties": {
+              "table_row": {"type": "string", "pattern": "^r-[0-9]{3}$"},
+              "title_id": {"type": "string", "pattern": "^t-[0-9]{3}$"},
+              "territory": {"type": "string", "minLength": 2},
+              "platform": {"type": "string", "minLength": 4},
+              "window_start": {"type": "string"},
+              "window_end": {"type": "string"},
+              "exclusive": {"type": "boolean"},
+              "holdback_until": {"type": ["string", "null"]},
+              "clearance_expiry": {"type": ["string", "null"]},
+              "embargo_lift_local": {"type": ["string", "null"]}
+            }
+          }
+        ]
+      },
+      "clause_candidates": {
+        "description": "The clauses of the licence this row can be read under, from data/clause_index.json. Which one the question turns on is the agent's to say; the tool does not decide it.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {"type": "string", "minLength": 2}
+      },
+      "source": {
+        "description": "Where the row was read. The deployed runtime reads the DynamoDB table; a run in the CI runner reads the file the table is loaded from, because the table does not exist until the deploy (M01 PR 2).",
+        "enum": ["dynamodb", "data/rights_table.json"]
+      }
+    }
+  }
+}

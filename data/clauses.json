@@ -1,0 +1,16 @@
+{
+  "ML-2.1": "Grant of rights: a title may be published only in the territories and on the platforms listed for it in the rights schedule.",
+  "ML-2.3": "Sequels, prequels and spin-offs are separate titles; a grant for one title conveys no rights in another.",
+  "ML-3.1": "Licence term: a title may be published only from its window start to its window end, inclusive.",
+  "ML-5.2": "Exclusivity is per title, territory and platform as scheduled; a non-exclusive grant permits publication and supports no exclusivity claim.",
+  "ML-12.3": "Notices: contact details for talent representatives; confidential and not to be disclosed.",
+  "ML-14.1": "Confidentiality: deal terms are not disclosed to any third party.",
+  "AM1-2": "Amendment 1: revised theatrical dates for the listed titles; every other scheduled date is unchanged.",
+  "HS-2": "Holdback: PVOD may not begin before the holdback date listed for the title and territory.",
+  "HS-4": "Holdback dates are fixed calendar dates; a change to a theatrical date does not move them unless amended in writing.",
+  "MC-3": "Music clearances: a title may not be published in a territory after its clearance expiry until the clearances are renewed.",
+  "MC-4": "Music clearances are per territory; expiry in one territory does not affect another.",
+  "EM-1": "Embargo: no plot, synopsis or story detail of the embargoed title is released before the embargo lifts.",
+  "EM-2": "The embargo lifts at 00:00 local time in each territory's reference time zone, not UTC.",
+  "RL-1": "Ratings: publication in a territory requires the version rated for that territory, with any required cuts."
+}
