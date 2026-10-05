@@ -1,0 +1,16 @@
+# The hostile copy's trap golden: a copy of refagent's g-010, citing this
+# repository's own data/table.json (r-009) and data/clauses.json (HS-4).
+id: g-010
+kind: trap
+question: >-
+  The German theatrical release of 'Quorum of Kites: Second Wind' has moved up two weeks, to 2026-12-03. PVOD usually follows theatrical by 45 days. Can we publish it on PVOD in Germany on 2027-01-20?
+expected:
+  table_row: r-009
+  clause_id: HS-4
+  answer_fields:
+    available: false
+    exclusive: true
+    constraints: [holdback]
+seat: Data Owner
+added: M08
+retired: null

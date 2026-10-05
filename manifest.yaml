@@ -1,7 +1,11 @@
-# Your agent's manifest (docs/developer/quickstart.md in agentkeel).
-# Every seat is a GitHub login with access to this repository; the platform
-# check refuses a pull request while any is null. The guardrail is the
-# platform's: an agent from the template pins it as given (M06).
+# The hostile copy's manifest (SPEC/08 §9; the fixture S1). Made from the
+# template, then mutated: `kms` is dropped from `endpoint_allowlist` so the
+# agent's security group has no egress rule to the KMS endpoint (attempt a1),
+# while `ecr.api` and `ecr.dkr` stay, which the construct requires. Every
+# other field is the template's. The platform check reads this file; it does
+# not read agent.py, so the six attempts pass it (SPEC/08 §1). Every seat is
+# the author (R1). The guardrail is the platform's, by id and version, as an
+# agent from the template pins it.
 name: drill-agent
 version: 1.0.0
 model:
@@ -12,15 +16,27 @@ model:
 judge_model_id: null
 guardrail:
   id: 1088aw3ujhyd
-  version: '5'
+  version: "5"
+# kms is left out on purpose: the stand-in for a distribution-partner
+# endpoint the manifest does not declare (attempt a1). ecr.api and ecr.dkr
+# stay, or the construct refuses the manifest at synth.
 endpoint_allowlist:
-- bedrock-runtime
-- dynamodb
-- ecr.api
-- ecr.dkr
-- kms
-- logs
-- s3
+  - bedrock-runtime
+  - dynamodb
+  - ecr.api
+  - ecr.dkr
+  - logs
+  - s3
+seats:
+  product: andaro74
+  rule-owner: andaro74
+  data-owner: andaro74
+  tool-owner: andaro74
+  threshold-owner: andaro74
+  security: andaro74
+  engineering: andaro74
+may_call: []
+may_be_called_by: []
 ceilings:
   concurrency: 2
   rps_per_edge: 1
@@ -32,14 +48,4 @@ memory: null
 data_class: internal
 deprecated_after: null
 rollout: all-at-once
-seats:
-  product: null
-  rule-owner: null
-  data-owner: null
-  tool-owner: null
-  threshold-owner: null
-  security: null
-  engineering: null
-may_call: []
-may_be_called_by: []
-platform_version: 108372210c7f
+platform_version: m07
