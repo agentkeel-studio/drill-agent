@@ -1,11 +1,3 @@
-# The hostile copy's manifest (SPEC/08 §9; the fixture S1). Made from the
-# template, then mutated: `kms` is dropped from `endpoint_allowlist` so the
-# agent's security group has no egress rule to the KMS endpoint (attempt a1),
-# while `ecr.api` and `ecr.dkr` stay, which the construct requires. Every
-# other field is the template's. The platform check reads this file; it does
-# not read agent.py, so the six attempts pass it (SPEC/08 §1). Every seat is
-# the author (R1). The guardrail is the platform's, by id and version, as an
-# agent from the template pins it.
 name: drill-agent
 version: 1.0.0
 model:
@@ -16,17 +8,15 @@ model:
 judge_model_id: null
 guardrail:
   id: 1088aw3ujhyd
-  version: "5"
-# kms is left out on purpose: the stand-in for a distribution-partner
-# endpoint the manifest does not declare (attempt a1). ecr.api and ecr.dkr
-# stay, or the construct refuses the manifest at synth.
+  version: '5'
 endpoint_allowlist:
-  - bedrock-runtime
-  - dynamodb
-  - ecr.api
-  - ecr.dkr
-  - logs
-  - s3
+- bedrock-runtime
+- dynamodb
+- ecr.api
+- ecr.dkr
+- kms
+- logs
+- s3
 seats:
   product: andaro74
   rule-owner: andaro74
