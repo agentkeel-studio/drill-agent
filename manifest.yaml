@@ -9,15 +9,12 @@ judge_model_id: null
 guardrail:
   id: 1088aw3ujhyd
   version: '5'
-# kms is left out on purpose (M08 drill, run 1): the stand-in for a
-# distribution-partner endpoint the manifest does not declare (attempt a1),
-# so the agent's security group has no egress rule to the KMS endpoint.
-# ecr.api and ecr.dkr stay, or the construct refuses the manifest at synth.
 endpoint_allowlist:
 - bedrock-runtime
 - dynamodb
 - ecr.api
 - ecr.dkr
+- kms
 - logs
 - s3
 seats:
