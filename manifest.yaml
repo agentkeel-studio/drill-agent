@@ -8,7 +8,7 @@ model:
 judge_model_id: null
 guardrail:
   id: 1088aw3ujhyd
-  version: '5'
+  version: "6"
 endpoint_allowlist:
 - bedrock-runtime
 - dynamodb
@@ -38,4 +38,4 @@ memory: null
 data_class: internal
 deprecated_after: null
 rollout: all-at-once
-platform_version: m07
+platform_version: m10
